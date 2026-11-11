@@ -68,9 +68,10 @@ def _outer_integrand(y: float, profit_fn) -> float:
 
 # For y >= X_M both profit flows are the constant C = sqrt(X_M) (+ M_PREMIUM
 # for M), so psi(y)*m'(y) = 2*y^(sqrt(3)-2) and phi(y)*m'(y) = 2*y^(-sqrt(3)-2)
-# have elementary antiderivatives there. Using these closed forms instead of
-# numerical quadrature over the constant tail avoids the poor conditioning of
-# scipy.integrate.quad on a slowly-decaying semi-infinite integrand.
+# have elementary antiderivatives there (m'(y) = 2/y^3,
+# src.fundamental_solutions.speed_density). Using these closed forms instead
+# of numerical quadrature over the constant tail avoids the poor conditioning
+# of scipy.integrate.quad on a slowly-decaying semi-infinite integrand.
 _INNER_TAIL_EXPONENT = SQRT3 - 1.0  # antiderivative exponent of 2*y^(sqrt(3)-2)
 _OUTER_TAIL_EXPONENT = -SQRT3 - 1.0  # antiderivative exponent of 2*y^(-sqrt(3)-2)
 

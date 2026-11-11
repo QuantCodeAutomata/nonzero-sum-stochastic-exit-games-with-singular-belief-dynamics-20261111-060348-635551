@@ -44,9 +44,12 @@ def scale_density(x: np.ndarray | float) -> np.ndarray | float:
 def speed_density(x: np.ndarray | float) -> np.ndarray | float:
     """Speed density m'(x) = 2 / (sigma(x)^2 * s'(x)) = 2 / x^3.
 
-    The factor 2 corresponds to the generator convention
-    L = (1/2) sigma(x)^2 u'' + mu(x) u' used throughout the paper, consistent
-    with the Wronskian value computed in `wronskian`.
+    With the generator convention L = (1/2) sigma(x)^2 u'' + mu(x) u' and
+    L = d/dm (d/ds) (Borodin & Salminen, Handbook of Brownian Motion, Ch.
+    II.1), s'(x) m'(x) = 2/sigma(x)^2, which with s'(x) = x gives
+    m'(x) = 2/x^3. This value (and not 1/x^3) is the one for which the
+    resolvent in `resolvent_at_point` matches a direct Monte Carlo estimate of
+    E_x[int_0^inf e^{-r t} D(X_t) dt] (tests/test_resolvents.py).
     """
     x = np.asarray(x, dtype=float)
     return 2.0 / x**3
