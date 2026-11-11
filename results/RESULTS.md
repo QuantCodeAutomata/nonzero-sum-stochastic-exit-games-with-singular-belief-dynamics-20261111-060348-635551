@@ -62,25 +62,47 @@ types essentially never exit), the belief process starts at 1 and decreases
 without a jump along the simulated path, and the three-region decomposition
 used for plotting matches Section 2's description. The absolute boundary
 levels are **not reproduced** at the paper's plotted scale: computed
-`alpha(5) = 16.7` is about 20 times the Figure 1 plot estimate of `0.85`.
-This gap was localized, not merely observed: `alpha` is the same function in
-exp_1 and exp_2 (it does not depend on the range of `theta`, only on `D`,
-`M`, `r` and the diffusion, all identical in both experiments). exp_1's plot
-estimate for Figure 1 implies `alpha(5) < alpha(2)` is impossible if
-`alpha(2)` were anywhere near exp_2's own plot estimate of `4` for Figure 2
-(an increasing function cannot have `alpha(5) = 0.85 < alpha(2) = 4`), so the
-two plot-estimate tables are mutually inconsistent, which confirms they are
-imprecise pixel-level readings of the figures rather than a calibrated
-numerical target. The resolvent `D_hat` was independently checked against a
+`alpha(5) = 16.7` is about 20 times the Figure 1 plot estimate of `0.85`, and
+computed `beta(0.5) ~ 0` is far from the plot estimate of `0.38`. This gap was
+localized against the paper's own theorems, not merely observed against an
+uncalibrated figure reading:
+  - Assumption 2.3(ii)/Proposition 2.4(ii) prove `beta(theta) <= c_M(theta)`,
+    where `c_M(theta)` is the largest `x` with `M(x) <= r theta`. Since
+    `M(x) = D(x) + 2 >= 2` for every `x` and `r theta = 0.5 < 2` at
+    `theta = 0.5`, the set `{x : M(x) <= r theta}` is empty, so
+    `c_M(0.5) = x_L = 0` and the paper's own theorem forces `beta(0.5) = 0`
+    exactly. The plot-estimate value `beta(0.5) ~ 0.38` therefore contradicts
+    Proposition 2.4(ii) and cannot be the true value of `beta(0.5)`; the
+    computed `beta(0.5) = 0.0001` (zero to the tolerance of the optimisation
+    grid) is the value the paper's own result requires.
+  - A dense grid search of the objective `a_theta(x) = (theta - D_hat(x)) /
+    phi(x)` at `theta = 5` over 400 log-spaced points on `(0.01, 30)` gives
+    `a_5(16.69) = 15.93` against `a_5(0.85) = 3.84`: the computed boundary
+    `alpha(5) = 16.69` is the true global maximiser of `a_5`, not an
+    optimiser artefact that missed a larger value near the plot estimate.
+  - `alpha` is the same function in exp_1 and exp_2 (it does not depend on
+    the range of `theta`, only on `D`, `M`, `r` and the diffusion, all
+    identical in both experiments). exp_1's plot estimate for Figure 1
+    implies `alpha(5) < alpha(2)` is impossible if `alpha(2)` were anywhere
+    near exp_2's own plot estimate of `4` for Figure 2 (an increasing
+    function cannot have `alpha(5) = 0.85 < alpha(2) = 4`), so the two
+    plot-estimate tables are mutually inconsistent, confirming they are
+    imprecise pixel-level readings of the figures rather than a calibrated
+    numerical target.
+The resolvent `D_hat` was independently checked against a
 Monte-Carlo estimate of `E_x[int_0^T e^{-t} D(X_t) dt]` (`tests/test_resolvents.py`),
 and against the finite-difference residual of `(L - r) D_hat = -D`
 (`tests/test_fundamental_solutions.py`), both of which pass; the boundary
 computation itself is internally consistent (monotone in `theta`,
-`alpha(0.5) ~ 0`) with the properties Section 3 attributes to it. The scale
-mismatch is attributed to the plot-estimate values, not to the implementation;
-see "Deviations from the paper" below. Verdict: **partially reproduced**
-(qualitative structure reproduced; absolute boundary scale not reproduced
-against an uncalibrated reference).
+`alpha(0.5) ~ 0`) with the properties Section 3 attributes to it, and
+`alpha(theta) <= c_D(theta) = theta^2` (Assumption 2.3(i), `r = 1`) holds for
+every computed value (`alpha(0.5) = 0.167 <= 0.25`, `alpha(5) = 16.69 <=
+25`). The scale mismatch is attributed to the plot-estimate values, not to
+the implementation; see "Deviations from the paper" below. Verdict:
+**partially reproduced** (qualitative structure reproduced and, for
+`beta(0.5)`, the exact value required by Proposition 2.4(ii) is reproduced;
+absolute boundary scale of the Figure 1 plot estimate not reproduced against
+a reference that itself contradicts the paper's Proposition 2.4(ii)).
 
 ## Experiment exp_2 -- Reduced model without monopoly exit (Figure 2)
 
