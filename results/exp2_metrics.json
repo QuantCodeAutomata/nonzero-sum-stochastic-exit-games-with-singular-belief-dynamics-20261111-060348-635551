@@ -1,0 +1,28 @@
+{
+  "experiment": "exp_2",
+  "theta_l": 0.5,
+  "theta_u": 2.0,
+  "x0_trajectory": 8.0,
+  "t_horizon": 4.0,
+  "dt_simulation": 0.001,
+  "random_seed": 20260615,
+  "beta_identically_zero": true,
+  "max_abs_beta": 0.0004178448930807352,
+  "computed": {
+    "alpha_0_5": 0.1668663743582674,
+    "alpha_at_z_0_55": 1.1718212212756636,
+    "alpha_at_z_0_85": 2.1029245009323256,
+    "alpha_at_z_0_98": 2.590394120288846,
+    "alpha_2": 2.669926195049277
+  },
+  "reference_figure_2": {
+    "alpha_at_theta_0_5": 0.0,
+    "alpha_at_z_0_55": 1.0,
+    "alpha_at_z_0_85": 2.0,
+    "alpha_at_z_0_98": 3.0,
+    "alpha_at_theta_2": 4.0
+  },
+  "z0": 1.0,
+  "market_collapse_time": null,
+  "z_final": 0.9472526361721287
+}

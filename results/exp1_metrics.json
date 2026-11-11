@@ -1,0 +1,25 @@
+{
+  "experiment": "exp_1",
+  "theta_l": 0.5,
+  "theta_u": 5.0,
+  "x0_trajectory": 8.0,
+  "t_horizon": 4.0,
+  "dt_simulation": 0.001,
+  "random_seed": 20260615,
+  "computed": {
+    "beta_0_5": 0.00010446131968971852,
+    "alpha_0_5": 0.1668663743582674,
+    "alpha_5": 16.68721061197745,
+    "beta_at_theta_0_75_quantile": 2.3465843720059483
+  },
+  "reference_figure_1": {
+    "beta_at_theta_0_5": 0.38,
+    "beta_at_z_0_75": 1.0,
+    "alpha_at_theta_0_5": 0.0,
+    "alpha_at_theta_5": 0.85
+  },
+  "z0": 1.0,
+  "z_jump_at_t0": false,
+  "market_collapse_time": null,
+  "z_final": 0.363583511875175
+}
